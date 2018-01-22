@@ -1,13 +1,13 @@
 ﻿using Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using NUnit.Framework;
 using Repositories;
 using Services;
 using System;
 
 namespace ServicesTests
 {
-    [TestClass]
+    [TestFixture]
     public class TestCarService
     {
         const string dbName = "POC_CSTB";
@@ -16,7 +16,7 @@ namespace ServicesTests
         CarService TestedService;
         Mock<ICarRepository> mockRepository;
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             mockRepository = new Mock<ICarRepository>();
@@ -25,14 +25,14 @@ namespace ServicesTests
 
         }
 
-        [TestCleanup]
+        [TearDown]
         public void Cleanup()
         {
             mockRepository = null;
             TestedService = null;
         }
 
-        [TestMethod]
+        [Test]
         public void CarService_TestSave_InsertMode()
         {
             // Arrange
@@ -55,7 +55,7 @@ namespace ServicesTests
             mockRepository.Verify(repo => repo.Update(carForInstert), Times.Never);
         }
 
-        [TestMethod]
+        [Test]
         public void CarService_TestSave_UpdateMode()
         {
             // Arrange
@@ -81,7 +81,7 @@ namespace ServicesTests
             mockRepository.Verify(repo => repo.Update(carForUpdate));
         }
 
-        [TestMethod]
+        [Test]
         public void CarService_TestFind()
         {
             // Arrange
@@ -105,7 +105,7 @@ namespace ServicesTests
             Assert.AreEqual(carToFind, result);
         }
 
-        [TestMethod]
+        [Test]
         public void CarService_TestDelete()
         {
             // Arrange

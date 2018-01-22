@@ -1,12 +1,12 @@
 ﻿using Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Repositories;
 using System;
 using UtilsTests;
 
 namespace RepositoriesTests
 {
-    [TestClass]
+    [TestFixture]
     public class TestCarRepository
     {
         const string dbName = "POC_CSTB";
@@ -14,19 +14,19 @@ namespace RepositoriesTests
 
         CarRepository TestedRepository;
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             TestedRepository = new CarRepository();
         }
 
-        [TestCleanup]
+        [TearDown]
         public void Cleanup()
         {
             TestedRepository = null;
         }
 
-        [TestMethod]
+        [Test]
         public void CarRepository_TestInsert()
         {
             // Arrange
@@ -50,7 +50,7 @@ namespace RepositoriesTests
             Assert.AreEqual(before + 1, after);
         }
 
-        [TestMethod]
+        [Test]
         public void CarRepository_TestUpdate()
         {
             // Arrange
@@ -74,7 +74,7 @@ namespace RepositoriesTests
             Assert.AreEqual(inserted.Passengers, updated.Passengers);
         }
 
-        [TestMethod]
+        [Test]
         public void CarRepository_TestFind()
         {
             // Arrange
@@ -93,7 +93,7 @@ namespace RepositoriesTests
             Assert.AreEqual(inserted.Passengers, found.Passengers);
         }
 
-        [TestMethod]
+        [Test]
         public void CarRepository_TestDelete()
         {
             // Arrange
